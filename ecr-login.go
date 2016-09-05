@@ -2,14 +2,15 @@ package main
 
 import (
 	"encoding/base64"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/ec2metadata"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/session"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/service/ecr"
 	"os"
 	"strings"
 	"text/template"
 	"time"
+
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/ec2metadata"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/session"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/service/ecr"
 )
 
 type Auth struct {
@@ -28,7 +29,7 @@ func check(e error) {
 }
 
 // default template prints docker login command
-const DEFAULT_TEMPLATE = `{{range .}}docker login -u {{.User}} -p {{.Pass}} -e none {{.ProxyEndpoint}}
+const DEFAULT_TEMPLATE = `{{range .}}docker login -u {{.User}} -p {{.Pass}} {{.ProxyEndpoint}}
 {{end}}`
 
 // load template from file or use default
